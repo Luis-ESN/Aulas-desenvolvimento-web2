@@ -14,6 +14,7 @@ function TaskList() {
   { value: 'true', label: 'Completas' },
   { value: 'false', label: 'Incompletas' }
 ]
+  const [option, setOption] = useState({value: '', label: 'Todas'})
 
   const [title, setTitle] = useState("");
   const [completed, setCompleted] = useState(""); // "", "true", "false"
@@ -37,6 +38,13 @@ function TaskList() {
     setTasks(getTasks(filters));
   };
 
+  const handleOption = (op) => {
+    // Navega para a página de criar/editar tarefa passando os dados da tarefa
+    //navigate('/task-form', { state: { task } });
+    setOption(op);
+    setCompleted(op.value)
+  };
+
   const handleEdit = (task) => {
     // Navega para a página de criar/editar tarefa passando os dados da tarefa
     //navigate('/task-form', { state: { task } });
@@ -54,7 +62,7 @@ function TaskList() {
       <h2>Lista de Tarefas</h2>
 
       <form onSubmit={handleFilter}>
-        <div>
+        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
           <label>Nome: </label>
           <input
             type="text"
@@ -63,20 +71,15 @@ function TaskList() {
             onChange={(e) => setTitle(e.target.value)}
           />
         </div>
-        <div>
+        <div><p></p></div>
+
+        <div  style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          <div>
           <label>STATUS</label>
-          <Select options={options} value={options[0]}/>
-        </div>
-
-        <div>
-          <label>Status: </label>
-
-
-          <select value={completed} onChange={(e) => setCompleted(e.target.value)}>
-            <option value="">Todas</option>
-            <option value="true">Feitas</option>
-            <option value="false">Não feitas</option>
-          </select>
+          </div>
+          <div style={{width: '150px'}}>
+          <Select options={options} value={option} onChange={(e) => handleOption(e)}/>
+            </div>
         </div>
 
         <button type="submit">Filtrar</button>
