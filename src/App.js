@@ -8,7 +8,7 @@ function App() {
     <Router>
       <nav>
         <Link to="/taskslist">Listar Tarefas</Link> |{" "}
-        <Link to="/taskform">Nova Tarefa</Link>
+        <Link to="/taskform" state={{}}>Nova Tarefa</Link>
       </nav>
       <Routes>
         <Route path="/taskslist" element={<TaskList />} />
