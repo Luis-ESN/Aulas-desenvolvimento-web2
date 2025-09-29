@@ -18,7 +18,12 @@ function TaskForm() {
       setId(task.id);
       setTitle(task.title);
       setCompleted(task.completed);
-    }
+    }else {
+    // Resetar campos para criação
+    setId(undefined);
+    setTitle("");
+    setCompleted(0);
+  }
   }, [location.state]);
 
 
